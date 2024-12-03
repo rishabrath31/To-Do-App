@@ -1,15 +1,16 @@
 import PropTypes from 'prop-types';
 import ToDoItem from './ToDoItem';
 
-const ToDoList = ({ tasks, deleteTask, markAsCompleted }) => {
+const ToDoList = ({ tasks, toggleComplete, deleteTask, updateTask }) => {
   return (
     <ul className="todo-list">
       {tasks.map((task) => (
         <ToDoItem
           key={task.id}
           task={task}
+          toggleComplete={toggleComplete}
           deleteTask={deleteTask}
-          markAsCompleted={markAsCompleted}
+          updateTask={updateTask}
         />
       ))}
     </ul>
@@ -24,8 +25,9 @@ ToDoList.propTypes = {
       completed: PropTypes.bool.isRequired,
     })
   ).isRequired,
+  toggleComplete: PropTypes.func.isRequired,
   deleteTask: PropTypes.func.isRequired,
-  markAsCompleted: PropTypes.func.isRequired,
+  updateTask: PropTypes.func.isRequired,
 };
 
 export default ToDoList;

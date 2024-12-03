@@ -1,6 +1,7 @@
 import  { useState } from 'react';
 import Header from './components/Header';
 import ToDoList from './components/ToDoList';
+import './App.css';
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
@@ -15,7 +16,7 @@ const App = () => {
   };
 
   // Mark a task as completed
-  const markAsCompleted = (id) => {
+  const toggleComplete = (id) => {
     setTasks(
       tasks.map((task) =>
         task.id === id ? { ...task, completed: true } : task
@@ -26,6 +27,15 @@ const App = () => {
   // Delete a task
   const deleteTask = (id) => {
     setTasks(tasks.filter((task) => task.id !== id));
+  };
+
+  // Edit a task
+  const updateTask = (id, newText) => {
+    setTasks(
+      tasks.map((task) =>
+        task.id === id ? { ...task, text: newText } : task
+      )
+    );
   };
 
   return (
@@ -42,8 +52,9 @@ const App = () => {
       </div>
       <ToDoList
         tasks={tasks}
+        toggleComplete={toggleComplete}
         deleteTask={deleteTask}
-        markAsCompleted={markAsCompleted}
+        updateTask={updateTask}
       />
     </div>
   );
